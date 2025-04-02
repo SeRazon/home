@@ -3,7 +3,7 @@
     <Transition name="fade" mode="out-in">
       <div v-if="!store.playerState || !store.playerLrcShow" class="power">
         <span>
-          <span :class="startYear < fullYear ? 'c-hidden' : 'hidden'">Copyright&nbsp;</span>
+          <span :class="startYear < fullYear ? 'c-hidden' : 'hidden'">星鸿_SeRazon 2024-2025 Copyright</span>
           &copy;
           <span v-if="startYear < fullYear"
             class="site-start">
