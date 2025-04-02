@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const mainStore = defineStore("main", {
   state: () => {
     return {
-      imgLoadStatus: false, // 壁纸加载状态
+      imgLoadStatus: true, // 壁纸加载状态
       innerWidth: null, // 当前窗口宽度
       coverType: "0", // 壁纸种类
       siteStartShow: true, // 建站日期显示
@@ -12,7 +12,7 @@ export const mainStore = defineStore("main", {
       musicVolume: 0, // 音乐音量;
       musicOpenState: true, // 音乐面板开启状态
       backgroundShow: false, // 壁纸展示状态
-      boxOpenState: false, // 盒子开启状态
+      boxOpenState: true, // 盒子开启状态
       mobileOpenState: true, // 移动端开启状态
       mobileFuncState: false, // 移动端功能区开启状态
       setOpenState: false, // 设置页面开启状态
@@ -20,8 +20,8 @@ export const mainStore = defineStore("main", {
       playerTitle: null, // 当前播放歌曲名
       playerArtist: null, // 当前播放歌手名
       playerLrc: "歌词加载中", // 当前播放歌词
-      playerLrcShow: true, // 是否显示底栏歌词
-      footerBlur: true, // 底栏模糊
+      playerLrcShow: false, // 是否显示底栏歌词
+      footerBlur: false, // 底栏模糊
       playerAutoplay: false, // 是否自动播放
       playerLoop: "all", // 循环播放 "all", "one", "none"
       playerOrder: "list", // 循环顺序 "list", "random"
