@@ -20,13 +20,18 @@
     "link": "https://space.bilibili.com/472170134/"
   },
   {
-    "icon": "Fire",
-    "name": "新闻",
-    "link": "https://news.starsriverorg.cn/"
+    "icon": "Link",
+    "name": "短链",
+    "link": "https://a.xhsr.org.cn/admin/"
   },
   {
     "icon": "LaptopCode",
     "name": "站点监测",
     "link": "https://status.starsriverorg.cn/"
+  },
+  {
+    "icon": "Fire",
+    "name": "新闻",
+    "link": "https://news.starsriverorg.cn/"
   }
 ]
