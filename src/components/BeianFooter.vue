@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<{
   policeIconSrc?: string
 }>(), {
   provinceShort: '赣',
-  policeIconSrc: '/gongan.png' // 如果没有本地图标，可改为 'https://www.beian.gov.cn/img/ghs.png'
+  policeIconSrc: 'https://www.beian.gov.cn/img/ghs.png'
 })
 </script>
 
