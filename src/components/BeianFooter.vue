@@ -30,13 +30,6 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
-  icp: string           // 例：2025074193
-  gaCode: string        // 例：36012202000590
-  provinceShort?: string // 例：赣、粤、京，默认“赣”
-  policeIconSrc?: string // 图标地址，默认 /gongan.png（或外链）
-}>()
-
 const props = withDefaults(defineProps<{
   icp: string
   gaCode: string
