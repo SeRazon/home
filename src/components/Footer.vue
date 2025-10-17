@@ -13,14 +13,15 @@
            {{ fullYear }}
            <a :href="siteUrl">{{ siteAuthor }}</a>
          </span>
- 
-         <!-- 站点备案 -->
-         <span>
-           &amp;
-           <a v-if="siteIcp" href="https://beian.miit.gov.cn" target="_blank">
-             {{ siteIcp }}
-           </a>
-         </span>
+
+         <!-- 站点备案（直接使用组件，保证与页脚一起显示） -->
+         <BeianFooter
+           class="beian-footer"
+           provinceShort="赣"
+           icp="2025074193"
+           gaCode="36012202000590"
+           policeIconSrc="https://www.beian.gov.cn/img/ghs.png"
+         />
        </div>
        <div v-else class="lrc">
          <Transition name="fade" mode="out-in">
@@ -34,15 +35,16 @@
      </Transition>
    </footer>
  </template>
- 
+
  <script setup>
  import { MusicOne } from "@icon-park/vue-next";
  import { mainStore } from "@/store";
+ import BeianFooter from "@/components/BeianFooter.vue";
  import config from "@/../package.json";
- 
+
  const store = mainStore();
  const fullYear = new Date().getFullYear();
- 
+
  // 加载配置数据
  // const siteStartDate = ref(import.meta.env.VITE_SITE_START);
  const startYear = ref(
