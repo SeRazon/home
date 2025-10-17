@@ -25,19 +25,15 @@
       >
         <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
       </Icon>
-      <!-- 页脚（仅 Footer；备案已内置在 Footer.vue） -->
+      <!-- 页脚 -->
       <Transition name="fade" mode="out-in">
-        <!-- 仅受 setOpenState 影响，避免背景模式把页脚也隐藏 -->
-        <div v-show="!store.setOpenState">
-          <Footer class="f-ter" />
-        </div>
+        <Footer class="f-ter" v-show="!store.backgroundShow && !store.setOpenState" />
       </Transition>
     </main>
   </Transition>
 </template>
 
 <script setup>
-import { nextTick, watch, onMounted, onBeforeUnmount } from "vue";
 import { helloInit, checkDays } from "@/utils/getTime.js";
 import { HamburgerButton, CloseSmall } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
@@ -81,9 +77,6 @@ watch(
 );
 
 onMounted(() => {
-  // 进入页面时确保退出壁纸展示模式，避免首屏只剩图片
-  store.backgroundShow = false;
-
   // 自定义鼠标
   cursorInit();
 
@@ -97,7 +90,7 @@ onMounted(() => {
     return false;
   };
 
-  // 鼠标中键事件：切换壁纸展示模式
+  // 鼠标中键事件
   window.addEventListener("mousedown", (event) => {
     if (event.button == 1) {
       store.backgroundShow = !store.backgroundShow;
@@ -112,7 +105,21 @@ onMounted(() => {
   getWidth();
   window.addEventListener("resize", getWidth);
 
-  
+  // 控制台输出
+  const styleTitle1 = "font-size: 20px;font-weight: 600;color: rgb(244,167,89);";
+  const styleTitle2 = "font-size:12px;color: rgb(244,167,89);";
+  const styleContent = "color: rgb(30,152,255);";
+  const title1 = "無名の主页";
+  const title2 = `
+ _____ __  __  _______     ____     __
+|_   _|  \\/  |/ ____\\ \\   / /\\ \\   / /
+  | | | \\  / | (___  \\ \\_/ /  \\ \\_/ /
+  | | | |\\/| |\\___ \\  \\   /    \\   /
+ _| |_| |  | |____) |  | |      | |
+|_____|_|  |_|_____/   |_|      |_|`;
+  const content = `\n\n版本: ${config.version}\n主页: ${config.home}\nGithub: ${config.github}`;
+  console.info(`%c${title1} %c${title2} %c${content}`, styleTitle1, styleTitle2, styleContent);
+});
 
 onBeforeUnmount(() => {
   window.removeEventListener("resize", getWidth);
@@ -243,10 +250,5 @@ onBeforeUnmount(() => {
       overflow-y: hidden;
     }
   }
-}
-
-/* 可选：给备案块一点上间距，避免贴得太近 */
-.beian-footer {
-  margin-top: 6px;
 }
 </style>
