@@ -25,9 +25,18 @@
       >
         <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
       </Icon>
-      <!-- 页脚 -->
+      <!-- 页脚（Footer + 备案） -->
       <Transition name="fade" mode="out-in">
-        <Footer class="f-ter" v-show="!store.backgroundShow && !store.setOpenState" />
+        <div v-show="!store.backgroundShow && !store.setOpenState">
+          <Footer class="f-ter" />
+          <BeianFooter
+            class="beian-footer"
+            provinceShort="赣"
+            icp="2025074193"
+            gaCode="36012202000590"
+            policeIconSrc="/gongan.png"  <!-- 或 'https://www.beian.gov.cn/img/ghs.png' -->
+          />
+        </div>
       </Transition>
     </main>
   </Transition>
@@ -43,6 +52,7 @@ import MainLeft from "@/views/Main/Left.vue";
 import MainRight from "@/views/Main/Right.vue";
 import Background from "@/components/Background.vue";
 import Footer from "@/components/Footer.vue";
+import BeianFooter from "@/components/BeianFooter.vue"; // ← 新增
 import Box from "@/views/Box/index.vue";
 import MoreSet from "@/views/MoreSet/index.vue";
 import cursorInit from "@/utils/cursor.js";
@@ -250,5 +260,10 @@ onBeforeUnmount(() => {
       overflow-y: hidden;
     }
   }
+}
+
+/* 可选：给备案块一点上间距，避免贴得太近 */
+.beian-footer {
+  margin-top: 6px;
 }
 </style>
