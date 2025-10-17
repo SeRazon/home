@@ -34,7 +34,7 @@
             provinceShort="赣"
             icp="2025074193"
             gaCode="36012202000590"
-            policeIconSrc="/gongan.png"  <!-- 或 'https://www.beian.gov.cn/img/ghs.png' -->
+            policeIconSrc="/gongan.png"
           />
         </div>
       </Transition>
