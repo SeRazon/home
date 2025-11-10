@@ -109,14 +109,8 @@ onMounted(() => {
   const styleTitle1 = "font-size: 20px;font-weight: 600;color: rgb(244,167,89);";
   const styleTitle2 = "font-size:12px;color: rgb(244,167,89);";
   const styleContent = "color: rgb(30,152,255);";
-  const title1 = "無名の主页";
-  const title2 = `
- _____ __  __  _______     ____     __
-|_   _|  \\/  |/ ____\\ \\   / /\\ \\   / /
-  | | | \\  / | (___  \\ \\_/ /  \\ \\_/ /
-  | | | |\\/| |\\___ \\  \\   /    \\   /
- _| |_| |  | |____) |  | |      | |
-|_____|_|  |_|_____/   |_|      |_|`;
+  const title1 = "星鸿の主页";
+  const title2 = `QQ : 2161252115`;
   const content = `\n\n版本: ${config.version}\n主页: ${config.home}\nGithub: ${config.github}`;
   console.info(`%c${title1} %c${title2} %c${content}`, styleTitle1, styleTitle2, styleContent);
 });
@@ -229,10 +223,9 @@ onBeforeUnmount(() => {
       }
     }
     .f-ter {
-      top: 675px; // 721px - 46px
-      @media (min-width: 391px) {
-        padding-left: 6px;
-      }
+      bottom: 16px;
+      padding-left: 0;
+      padding-right: 0;
     }
   }
   @media (max-width: 390px) {
@@ -244,7 +237,7 @@ onBeforeUnmount(() => {
       left: 167.5px; // 391px * 0.5 - 28px
     }
     .f-ter {
-      width: 391px;
+      width: 100%;
     }
     @media (min-height: 721px) {
       overflow-y: hidden;

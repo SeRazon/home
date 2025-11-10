@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<{
   policeIconSrc?: string
 }>(), {
   provinceShort: '赣',
-  policeIconSrc: 'https://www.beian.gov.cn/img/ghs.png'
+  policeIconSrc: '/images/icon/ghs.svg'
 })
 </script>
 
@@ -50,8 +50,10 @@ const props = withDefaults(defineProps<{
 .beian-row {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 8px;
-  line-height: 1;
+  line-height: 1.4;
 }
 .beian-link {
   display: inline-flex;
