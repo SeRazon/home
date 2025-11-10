@@ -39,7 +39,6 @@
 import { MusicOne } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
 import BeianFooter from "@/components/BeianFooter.vue";
-import config from "@/../package.json";
 
 const store = mainStore();
 const fullYear = new Date().getFullYear();
@@ -69,7 +68,7 @@ const showStartYearRange = computed(
   () => startYearNumber.value !== null && startYearNumber.value < fullYear,
 );
 
-const siteAuthor = ref(normalize(env.VITE_SITE_AUTHOR) || defaults.author);
+const siteAuthor = computed(() => normalize(env.VITE_SITE_AUTHOR) || defaults.author);
 
 const siteCopyrightText = computed(
   () => normalize(env.VITE_SITE_COPYRIGHT) || defaults.copyright,
@@ -103,20 +102,13 @@ const policeIconSrc = computed(
 
 <style lang="scss" scoped>
 #footer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 32px;
-  display: flex;
-  justify-content: center;
-  padding: 0 clamp(12px, 2vw, 32px);
+  width: 100%;
   color: #efefef;
-  z-index: 3;
 }
 
 .footer-shell {
-  width: 100%;
-  max-width: 1200px;
+  width: min(100%, 1200px);
+  margin: 0 auto;
   display: flex;
   justify-content: center;
 }
@@ -212,11 +204,6 @@ const policeIconSrc = computed(
 }
 
 @media (max-width: 720px) {
-  #footer {
-    bottom: 16px;
-    padding: 0 20px;
-  }
-
   .footer-panel {
     padding: 12px 16px;
     gap: 8px;
@@ -233,11 +220,6 @@ const policeIconSrc = computed(
 }
 
 @media (max-width: 480px) {
-  #footer {
-    bottom: 12px;
-    padding: 0 16px;
-  }
-
   .footer-panel {
     padding: 12px 14px;
   }

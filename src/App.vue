@@ -16,18 +16,21 @@
           <MoreSet />
         </section>
       </div>
-      <!-- 移动端菜单按钮 -->
-      <Icon
-        class="menu"
-        size="24"
-        v-show="!store.backgroundShow"
-        @click="store.mobileOpenState = !store.mobileOpenState"
-      >
-        <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
-      </Icon>
-      <!-- 页脚 -->
+      <!-- 底部控制区：菜单按钮 + 页脚 -->
       <Transition name="fade" mode="out-in">
-        <Footer class="f-ter" v-show="!store.backgroundShow && !store.setOpenState" />
+        <div
+          v-if="!store.backgroundShow && !store.setOpenState"
+          class="bottom-stack"
+        >
+          <Icon
+            class="menu-btn"
+            size="24"
+            @click="store.mobileOpenState = !store.mobileOpenState"
+          >
+            <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
+          </Icon>
+          <Footer class="bottom-footer" />
+        </div>
       </Transition>
     </main>
   </Transition>
@@ -135,7 +138,7 @@ onBeforeUnmount(() => {
     width: 100%;
     height: 100vh;
     margin: 0 auto;
-    padding: 0 0.5vw;
+    padding: 0 0.5vw clamp(180px, 24vh, 240px);
     .all {
       width: 100%;
       height: 100%;
@@ -157,18 +160,32 @@ onBeforeUnmount(() => {
       animation: fade 0.5s;
     }
     @media (max-width: 1200px) {
-      padding: 0 2vw;
+      padding: 0 2vw clamp(180px, 24vh, 240px);
     }
   }
-  .menu {
+  .bottom-stack {
     position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 30px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    pointer-events: none;
+    padding: 0 clamp(12px, 3vw, 32px);
+  }
+  @media (min-width: 721px) {
+    .bottom-stack {
+      gap: 0;
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+    }
+  }
+  .menu-btn {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-  top: auto;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(36px, 12vh, 88px));
-    left: 50%;
-    margin-left: -28px;
     width: 56px;
     height: 34px;
     background: rgb(0 0 0 / 20%);
@@ -176,6 +193,7 @@ onBeforeUnmount(() => {
     border-radius: 6px;
     transition: transform 0.3s;
     animation: fade 0.5s;
+    pointer-events: auto;
     z-index: 5;
     &:active {
       transform: scale(0.95);
@@ -186,6 +204,10 @@ onBeforeUnmount(() => {
     @media (min-width: 721px) {
       display: none;
     }
+  }
+  .bottom-footer {
+    pointer-events: auto;
+    width: 100%;
   }
   @media (max-height: 720px) {
     overflow-y: auto;
@@ -218,27 +240,11 @@ onBeforeUnmount(() => {
         }
       }
     }
-    .menu {
-  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(40px, 14vh, 96px));
-      margin-left: -28px;
-    }
-    .f-ter {
-      bottom: 16px;
-      padding-left: 0;
-      padding-right: 0;
-    }
   }
   @media (max-width: 390px) {
     overflow-x: auto;
     .container {
       width: 391px;
-    }
-    .menu {
-      left: 50%;
-      margin-left: -28px;
-    }
-    .f-ter {
-      width: 100%;
     }
     @media (min-height: 721px) {
       overflow-y: hidden;
