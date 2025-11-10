@@ -165,8 +165,10 @@ onBeforeUnmount(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 84%;
-    left: calc(50% - 28px);
+    top: auto;
+    bottom: clamp(96px, 16vh, 140px);
+    left: 50%;
+    margin-left: -28px;
     width: 56px;
     height: 34px;
     background: rgb(0 0 0 / 20%);
@@ -174,6 +176,7 @@ onBeforeUnmount(() => {
     border-radius: 6px;
     transition: transform 0.3s;
     animation: fade 0.5s;
+    z-index: 5;
     &:active {
       transform: scale(0.95);
     }
@@ -216,11 +219,8 @@ onBeforeUnmount(() => {
       }
     }
     .menu {
-      top: 605.64px; // 721px * 0.84
-      left: 170.5px; // 391 * 0.5 - 25px
-      @media (min-width: 391px) {
-        left: calc(50% - 25px);
-      }
+      bottom: clamp(88px, 18vh, 132px);
+      margin-left: -28px;
     }
     .f-ter {
       bottom: 16px;
@@ -234,7 +234,8 @@ onBeforeUnmount(() => {
       width: 391px;
     }
     .menu {
-      left: 167.5px; // 391px * 0.5 - 28px
+      left: 50%;
+      margin-left: -28px;
     }
     .f-ter {
       width: 100%;
