@@ -213,7 +213,7 @@ const policeIconSrc = computed(
 
 @media (max-width: 720px) {
   #footer {
-    bottom: 24px;
+    bottom: 16px;
     padding: 0 20px;
   }
 
@@ -234,7 +234,7 @@ const policeIconSrc = computed(
 
 @media (max-width: 480px) {
   #footer {
-    bottom: 20px;
+    bottom: 12px;
     padding: 0 16px;
   }
 

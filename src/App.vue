@@ -165,8 +165,8 @@ onBeforeUnmount(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: auto;
-    bottom: clamp(96px, 16vh, 140px);
+  top: auto;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(36px, 12vh, 88px));
     left: 50%;
     margin-left: -28px;
     width: 56px;
@@ -219,7 +219,7 @@ onBeforeUnmount(() => {
       }
     }
     .menu {
-      bottom: clamp(88px, 18vh, 132px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + clamp(40px, 14vh, 96px));
       margin-left: -28px;
     }
     .f-ter {
