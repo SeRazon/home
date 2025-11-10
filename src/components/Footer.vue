@@ -60,7 +60,7 @@ const defaults = {
   provinceShort: "赣",
   icp: "2025074193",
   gaCode: "36012202000590",
-  policeIcon: "/images/icon/police-badge.svg",
+  policeIcon: "/images/icon/ghs.png",
 };
 
 const normalize = (value) => (typeof value === "string" ? value.trim() : "");
