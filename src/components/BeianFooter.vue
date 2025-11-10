@@ -23,7 +23,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        {{ provinceShort }}ICP备{{ icp }}号
+        {{ provinceShort }}ICP备{{ icp }}号-1
       </a>
     </span>
   </div>
