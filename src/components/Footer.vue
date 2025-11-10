@@ -12,14 +12,6 @@
             <span class="separator" aria-hidden="true">©</span>
             <span v-if="showStartYearRange" class="site-start">{{ startYear }} - </span>
             <span class="current-year">{{ fullYear }}</span>
-            <a
-              class="author-link"
-              :href="siteUrl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {{ siteAuthor }}
-            </a>
           </p>
           <BeianFooter
             class="beian-footer"
@@ -55,8 +47,8 @@ const env = import.meta.env;
 
 const defaults = {
   copyright: "星鸿_SeRazon Copyright",
-  author: config.author || "SeRazon",
-  siteUrl: config.home || "https://xhsr.org.cn",
+  author: "SeRazon",
+  siteUrl: "https://xhsr.org.cn",
   provinceShort: "赣",
   icp: "2025074193",
   gaCode: "36012202000590",
