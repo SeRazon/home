@@ -107,7 +107,7 @@ export default ({ mode }) =>
       preprocessorOptions: {
         scss: {
           api: 'modern',
-          additionalData: `@use "./src/style/global.scss" as *;`,
+          additionalData: `@use "@/style/global.scss" as *;\n`,
           silenceDeprecations: ["legacy-js-api"],
         },
       },
