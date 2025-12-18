@@ -66,6 +66,8 @@ Weather and area access requires `高德开放平台` related API
 
 - Go to [高德开放平台控制台](https://console.amap.com/dev/index) to create a `Key` of type `Web Service` and fill the `Key` into `VITE_WEATHER_KEY` in `.env` 
 
+If you deploy to Vercel and want to avoid exposing the key in front-end bundles or to bypass CORS issues, set a server-side environment variable `WEATHER_KEY` in Vercel (Project → Settings → Environment Variables). The project includes a serverless proxy (`/api/weather`) which will use `WEATHER_KEY` to call AMap and third-party APIs. It will automatically be used when present; otherwise the app falls back to direct client-side requests.
+
 It can also be replaced by other methods
 
 ### Music

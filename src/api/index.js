@@ -53,23 +53,43 @@ export const getHitokoto = async () => {
  * 天气
  */
 
-// 获取高德地理位置信息
+// 获取高德地理位置信息（优先使用 serverless 代理，失败回退到直连）
 export const getAdcode = async (key) => {
-  const res = await fetch(`https://restapi.amap.com/v3/ip?key=${key}`);
-  return await res.json();
+  try {
+    const res = await fetch(`/api/weather?type=adcode`);
+    if (res.ok) return await res.json();
+    throw new Error("proxy failed");
+  } catch (err) {
+    // 回退到直接调用高德（方便本地开发或未配置 server-side key）
+    const res = await fetch(`https://restapi.amap.com/v3/ip?key=${key}`);
+    return await res.json();
+  }
 };
 
-// 获取高德地理天气信息
+// 获取高德地理天气信息（优先使用 serverless 代理，失败回退到直连）
 export const getWeather = async (key, city) => {
-  const res = await fetch(
-    `https://restapi.amap.com/v3/weather/weatherInfo?key=${key}&city=${city}`,
-  );
-  return await res.json();
+  try {
+    const res = await fetch(`/api/weather?type=weather&city=${encodeURIComponent(city)}`);
+    if (res.ok) return await res.json();
+    throw new Error("proxy failed");
+  } catch (err) {
+    // 回退到直接调用高德（方便本地开发或未配置 server-side key）
+    const res = await fetch(
+      `https://restapi.amap.com/v3/weather/weatherInfo?key=${key}&city=${city}`,
+    );
+    return await res.json();
+  }
 };
 
-// 获取教书先生天气 API
+// 获取教书先生天气 API（优先使用 serverless 代理，失败回退到直连）
 // https://api.oioweb.cn/doc/weather/GetWeather
 export const getOtherWeather = async () => {
-  const res = await fetch("https://api.oioweb.cn/api/weather/GetWeather");
-  return await res.json();
+  try {
+    const res = await fetch(`/api/weather?type=other`);
+    if (res.ok) return await res.json();
+    throw new Error("proxy failed");
+  } catch (err) {
+    const res = await fetch("https://api.oioweb.cn/api/weather/GetWeather");
+    return await res.json();
+  }
 };

@@ -82,12 +82,31 @@ const getWeatherData = async () => {
       };
       // 获取天气信息
       const result = await getWeather(mainKey, weatherData.adCode.adcode);
-      weatherData.weather = {
-        weather: result.lives[0].weather,
-        temperature: result.lives[0].temperature,
-        winddirection: result.lives[0].winddirection,
-        windpower: result.lives[0].windpower,
-      };
+      // 打印返回用于排查
+      console.log("高德天气返回：", result);
+      // 如果没有 lives 数据，尝试使用备用接口回退
+      if (!result || !result.lives || !result.lives.length) {
+        console.warn("高德天气数据缺失，尝试备用接口", result);
+        const other = await getOtherWeather();
+        console.log("备用天气返回：", other);
+        const data = other.result;
+        weatherData.adCode = {
+          city: data.city.City || weatherData.adCode.city || "未知地区",
+        };
+        weatherData.weather = {
+          weather: data.condition.day_weather,
+          temperature: getTemperature(data.condition.min_degree, data.condition.max_degree),
+          winddirection: data.condition.day_wind_direction,
+          windpower: data.condition.day_wind_power,
+        };
+      } else {
+        weatherData.weather = {
+          weather: result.lives[0].weather,
+          temperature: result.lives[0].temperature,
+          winddirection: result.lives[0].winddirection,
+          windpower: result.lives[0].windpower,
+        };
+      }
     }
   } catch (error) {
     console.error("天气信息获取失败:" + error);
