@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { getAdcode, getWeather, getOtherWeather } from "@/api";
+import { getAdcode, getWeather, getOtherWeather, getRegeo } from "@/api";
 import { Error } from "@icon-park/vue-next";
 
 // 高德开发者 Key
@@ -70,16 +70,61 @@ const getWeatherData = async () => {
         windpower: data.condition.day_wind_power,
       };
     } else {
-      // 获取 Adcode
-      const adCode = await getAdcode(mainKey);
-      console.log(adCode);
-      if (adCode.infocode !== "10000") {
-        throw "地区查询失败";
+      // 优先尝试浏览器定位（需要用户授权），若成功使用 regeo 获取 adcode；否则回退到 IP 定位
+      console.log("尝试使用浏览器定位获取经纬度");
+      const getPosition = (timeout = 8000) =>
+        new Promise((resolve, reject) => {
+          if (!navigator.geolocation) return reject(new Error("浏览器不支持定位"));
+          const timer = setTimeout(() => reject(new Error("定位超时")), timeout);
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              clearTimeout(timer);
+              resolve(pos.coords);
+            },
+            (err) => {
+              clearTimeout(timer);
+              reject(err);
+            },
+            { enableHighAccuracy: false, timeout: 8000, maximumAge: 0 },
+          );
+        });
+
+      let adCodeFromGeo = null;
+      try {
+        const coords = await getPosition(8000);
+        console.log("浏览器定位经纬度：", coords);
+        const location = `${coords.longitude},${coords.latitude}`;
+        const regeo = await getRegeo(mainKey, location);
+        console.log("regeo 返回：", regeo);
+        if (regeo && regeo.status === "1" && regeo.regeocode) {
+          const comp = regeo.regeocode.addressComponent || {};
+          adCodeFromGeo = {
+            city: comp.city || comp.province || comp.township || "未知地区",
+            adcode: comp.adcode || null,
+          };
+        }
+      } catch (err) {
+        console.warn("浏览器定位或 regeo 失败，回退到 IP 定位：", err);
       }
-      weatherData.adCode = {
-        city: adCode.city,
-        adcode: adCode.adcode,
-      };
+
+      if (adCodeFromGeo && adCodeFromGeo.adcode) {
+        weatherData.adCode = {
+          city: adCodeFromGeo.city,
+          adcode: adCodeFromGeo.adcode,
+        };
+      } else {
+        // 回退到 IP 定位
+        const adCode = await getAdcode(mainKey);
+        console.log("IP 定位返回：", adCode);
+        if (adCode.infocode !== "10000") {
+          throw "地区查询失败";
+        }
+        weatherData.adCode = {
+          city: adCode.city,
+          adcode: adCode.adcode,
+        };
+      }
+
       // 获取天气信息
       const result = await getWeather(mainKey, weatherData.adCode.adcode);
       // 打印返回用于排查

@@ -93,3 +93,18 @@ export const getOtherWeather = async () => {
     return await res.json();
   }
 };
+
+// 逆地理编码（传入经度,纬度，返回 regeo 结果）
+export const getRegeo = async (key, location) => {
+  try {
+    const res = await fetch(`/api/weather?type=regeo&location=${encodeURIComponent(location)}`);
+    if (res.ok) return await res.json();
+    throw new Error("proxy failed");
+  } catch (err) {
+    // 回退到直接调用高德 regeo（方便本地开发或未配置 server-side key）
+    const res = await fetch(
+      `https://restapi.amap.com/v3/geocode/regeo?key=${key}&location=${encodeURIComponent(location)}`,
+    );
+    return await res.json();
+  }
+};

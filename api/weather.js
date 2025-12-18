@@ -42,6 +42,19 @@ export default async function handler(req, res) {
       return res.status(200).json(data);
     }
 
+    // 逆地理编码（location 格式： lon,lat）
+    if (type === "regeo") {
+      if (!key) return res.status(500).json({ error: "WEATHER_KEY not configured" });
+      const { location } = req.query || {};
+      if (!location) return res.status(400).json({ error: "location parameter required" });
+      const r = await fetch(
+        `https://restapi.amap.com/v3/geocode/regeo?key=${key}&location=${encodeURIComponent(location)}`,
+      );
+      const data = await r.json();
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      return res.status(200).json(data);
+    }
+
     return res.status(400).json({ error: "invalid type" });
   } catch (err) {
     res.setHeader("Access-Control-Allow-Origin", "*");
