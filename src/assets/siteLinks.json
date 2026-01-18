@@ -25,6 +25,11 @@
     "link": "https://a.xhsr.org.cn/admin/"
   },
   {
+    "icon": "Albums",
+    "name": "图库",
+    "link": "https://gallery.xhsr.org.cn"
+  },
+  {
     "icon": "LaptopCode",
     "name": "站点监测",
     "link": "https://status.starsriverorg.cn/"
