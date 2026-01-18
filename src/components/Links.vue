@@ -71,7 +71,7 @@ const siteIcon = {
   Fire,
   LaptopCode,
   Link,
-  Albums
+  Albums,
 };
 
 // 链接跳转
