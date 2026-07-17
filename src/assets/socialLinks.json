@@ -15,7 +15,7 @@
     "name": "QQ",
     "icon": "/images/icon/qq.png",
     "tip": "有什么事吗",
-    "url": "https://res.abeim.cn/api/qq/?qq=2161252115"
+    "url": "https://qm.qq.com/q/5jMC3x7gxq"
   },
   {
     "name": "Email",
@@ -27,6 +27,6 @@
     "name": "Twitter",
     "icon": "/images/icon/twitter.png",
     "tip": "你懂的 ~",
-    "url": "https://x.com/starsriver779"
+    "url": "https://x.com/CNserazon"
   }
 ]
